@@ -120,7 +120,8 @@ class Sim extends CI_Controller
         $sim_id = $this->input->post('sim_id');
         $status = $this->input->post('status');
         $data = [
-            'status'     => $status
+            'status'     => $status,
+            'tanggal_diupdate' => date("Y-m-d")
         ];
         $update = $this->sim->update($data, $sim_id);
         if ($update > 0) {

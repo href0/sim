@@ -22,6 +22,8 @@
                     <th>Pekerjaan</th>
                     <th>Alamat</th>
                     <th>Status</th>
+                    <th>Tanggal Pembuatan</th>
+                    <th>Tanggal Diubah</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -39,6 +41,8 @@
                         <td><?= $row['pekerjaan'] ?></td>
                         <td><?= $row['alamat'] ?></td>
                         <td><?= $row['status'] ?></td>
+                        <td><?= $row['tanggal_pembuatan'] ?></td>
+                        <td><?= $row['tanggal_diupdate'] ?></td>
                         <td>
                             <a href="<?= base_url('sim/edit/') . $row['sim_id'] ?>" class="btn btn-success">Ubah</a>
                             <button data-toggle="modal" data-id="<?= $row['no_register'] ?>" class="btn btn-warning tambah_golongan">Tambah Golongan</button>
