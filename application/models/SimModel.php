@@ -27,6 +27,15 @@ class SimModel extends CI_Model
             ->get('sim')
             ->row_array();
     }
+    public function getByNoRegister($no_register)
+    {
+        return $this->db
+            ->join('jenis_pemohon', 'jenis_pemohon.jenis_pemohon_id = sim.jenis_pemohon_id')
+            ->join('golongan', 'golongan.golongan_id = sim.golongan_id')
+            ->where('no_register', $no_register)
+            ->get('sim')
+            ->row_array();
+    }
 
     public function update($data, $sim_id)
     {

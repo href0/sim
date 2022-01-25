@@ -125,6 +125,48 @@
                   }
               });
           });
+          let no_register = ''
+          let sim_id = ''
+          $('.tambah_golongan').on('click', function() {
+              no_register = $(this).data('id')
+              $('#modal-default').modal('show')
+          })
+          $('.ubah-status').on('click', function() {
+              sim_id = $(this).data('id')
+              $('#modal-ubah-status').modal('show')
+          })
+
+          $('#formAddGolongan').submit(function(event) {
+              event.preventDefault()
+              let data = $(this).serialize()
+              console.log(data)
+              $.ajax({
+                  url: '<?= base_url('sim/addgolongan') ?>',
+                  type: 'post',
+                  data: data + "&no_register=" + no_register,
+                  success: function(result) {
+                      console.log(result)
+                      $('#message').html(result)
+                      $('#modal-default').modal('hide')
+                  }
+              })
+          })
+
+          $('#formUbahStatus').submit(function(event) {
+              event.preventDefault()
+              let data = $(this).serialize()
+              console.log(data)
+              $.ajax({
+                  url: '<?= base_url('sim/ubahstatus') ?>',
+                  type: 'post',
+                  data: data + "&sim_id=" + sim_id,
+                  success: function(result) {
+                      console.log(result)
+                      $('#message').html(result)
+                      $('#modal-ubah-status').modal('hide')
+                  }
+              })
+          })
       })
   </script>
   </body>

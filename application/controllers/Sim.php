@@ -21,6 +21,7 @@ class Sim extends CI_Controller
             'title'         => 'Daftar Pembuat SIM',
             'sub_page'      => '',
             'table'         => $this->sim->getALl(),
+            'golongan'      => $this->golongan->getALl(),
             // 'username'      => $this->username_login,
             'content'       => 'sim/index'
         ];
@@ -81,6 +82,7 @@ class Sim extends CI_Controller
                 'jenis_kelamin'         => $this->input->post('jenis_kelamin'),
                 'pekerjaan'             => $this->input->post('pekerjaan'),
                 'alamat'                => $this->input->post('alamat'),
+                'status'                => 'baru'
             ];
             if ($this->sim->insert($data) > 0) {
                 $this->session->set_flashdata(
@@ -89,6 +91,40 @@ class Sim extends CI_Controller
                 );
                 redirect('sim/index');
             }
+        }
+    }
+
+    public function addgolongan()
+    {
+
+        $no_register = $this->input->post('no_register');
+        $sim = $this->sim->getByNoRegister($no_register);
+        $data = [
+            'no_register'           => $sim['no_register'],
+            'nama'                  => $sim['nama'],
+            'golongan_id'           => $this->input->post('golongan'),
+            'jenis_pemohon_id'      => $sim['jenis_pemohon_id'],
+            'umur'                  => $sim['umur'],
+            'tanggal_pembuatan'     => $sim['tanggal_pembuatan'],
+            'jenis_kelamin'         => $sim['jenis_kelamin'],
+            'pekerjaan'             => $sim['pekerjaan'],
+            'alamat'                => $sim['alamat'],
+        ];
+        if ($this->sim->insert($data) > 0) {
+            echo '<div class="alert alert-success" role="alert">Golongan Sim berhasil ditambahkan</div>';
+        }
+    }
+
+    public function ubahstatus()
+    {
+        $sim_id = $this->input->post('sim_id');
+        $status = $this->input->post('status');
+        $data = [
+            'status'     => $status
+        ];
+        $update = $this->sim->update($data, $sim_id);
+        if ($update > 0) {
+            echo '<div class="alert alert-success" role="alert">Status Sim berhasil diubah</div>';
         }
     }
 
